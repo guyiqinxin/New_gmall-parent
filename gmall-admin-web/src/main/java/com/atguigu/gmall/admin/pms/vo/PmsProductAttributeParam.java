@@ -78,7 +78,7 @@ public class PmsProductAttributeParam {
     @FlagValidator({"0","1"})
     private Integer type;
 
-
+    @Email(message = "邮箱格式不正确")
     private String email;
 
 }

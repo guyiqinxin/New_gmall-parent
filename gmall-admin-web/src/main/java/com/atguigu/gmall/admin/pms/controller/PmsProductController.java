@@ -3,6 +3,7 @@ package com.atguigu.gmall.admin.pms.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.atguigu.gmall.admin.pms.vo.PmsProductParam;
 import com.atguigu.gmall.admin.pms.vo.PmsProductQueryParam;
+import com.atguigu.gmall.pms.entity.Product;
 import com.atguigu.gmall.pms.service.ProductService;
 import com.atguigu.gmall.to.CommonResult;
 import io.swagger.annotations.Api;
@@ -13,10 +14,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 商品管理Controller
  */
+@CrossOrigin
 @RestController
 @Api(tags = "PmsProductController", description = "商品管理")
 @RequestMapping("/product")
@@ -29,20 +32,29 @@ public class PmsProductController {
     public Object create(@RequestBody PmsProductParam productParam,
                          BindingResult bindingResult) {
         //TODO 查询所有一级分类及子分类
+
+
+
         return new CommonResult().success(null);
     }
 
     @ApiOperation("根据商品id获取商品编辑信息")
     @GetMapping(value = "/updateInfo/{id}")
     public Object getUpdateInfo(@PathVariable Long id) {
-        //TODO 根据商品id获取商品编辑信息
-        return new CommonResult().success(null);
+        //TODO 根据商品id获取商品编辑信息(☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆)
+    Product product = productService.getproductById(id);
+
+
+        return new CommonResult().success(product);
     }
 
     @ApiOperation("更新商品")
     @PostMapping(value = "/update/{id}")
     public Object update(@PathVariable Long id, @RequestBody PmsProductParam productParam, BindingResult bindingResult) {
         //TODO 更新商品
+
+
+
         return new CommonResult().success(null);
     }
 
@@ -51,14 +63,22 @@ public class PmsProductController {
     public Object getList(PmsProductQueryParam productQueryParam,
                           @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        //TODO 查询商品
-        return new CommonResult().success(null);
+        // 分页查询商品(☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆)
+
+     Map<String,Object> pageinfo =  productService.pageProduct(pageSize,pageNum);
+
+
+
+        return new CommonResult().success(pageinfo);
     }
 
     @ApiOperation("根据商品名称或货号模糊查询")
     @GetMapping(value = "/simpleList")
     public Object getList(String  keyword) {
         //TODO 根据商品名称或货号模糊查询
+
+
+
         return new CommonResult().success(null);
     }
 
@@ -68,6 +88,9 @@ public class PmsProductController {
                                      @RequestParam("verifyStatus") Integer verifyStatus,
                                      @RequestParam("detail") String detail) {
         //TODO 批量修改审核状态
+
+
+
         return new CommonResult().success(null);
     }
 
@@ -76,6 +99,9 @@ public class PmsProductController {
     public Object updatePublishStatus(@RequestParam("ids") List<Long> ids,
                                      @RequestParam("publishStatus") Integer publishStatus) {
         //TODO 批量上下架
+
+
+
         return new CommonResult().success(null);
     }
 
@@ -84,6 +110,9 @@ public class PmsProductController {
     public Object updateRecommendStatus(@RequestParam("ids") List<Long> ids,
                                       @RequestParam("recommendStatus") Integer recommendStatus) {
         //TODO 批量推荐商品
+
+
+
         return new CommonResult().success(null);
     }
 
@@ -92,6 +121,9 @@ public class PmsProductController {
     public Object updateNewStatus(@RequestParam("ids") List<Long> ids,
                                         @RequestParam("newStatus") Integer newStatus) {
         //TODO 批量设为新品
+
+
+
         return new CommonResult().success(null);
     }
 
@@ -100,6 +132,9 @@ public class PmsProductController {
     public Object updateDeleteStatus(@RequestParam("ids") List<Long> ids,
                                   @RequestParam("deleteStatus") Integer deleteStatus) {
         //TODO 根据商品id获取商品编辑信息
+
+
+
         return new CommonResult().success(null);
     }
 }

@@ -18,7 +18,7 @@ public class GmallGlobalExceptionHandler {
 
 
 
-    //数学运算？精确
+    //数学运算？精确  切面会吃掉异常
     @ExceptionHandler(ArithmeticException.class)
     public Object handleNullpointException(ArithmeticException e){
         log.error("全局异常处理类感知到异常...");
